@@ -77,6 +77,27 @@ namespace DownMarker.WinForms
             this.events[x => x.CanRedo] += HandleCanRedoChanged;
             this.events[x => x.CanUndo] += HandleCanUndoChanged;
             this.events[x => x.PlainStyle] += HandlePlainStyleChanged;
+
+            if (Config.Read("Maximized") == "true")
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+
+            this.Resize += (sender, args) =>
+                {
+                    if (this.WindowState == FormWindowState.Maximized)
+                    {
+                        Config.SetSetting("Maximized", "true");
+                    }
+                    else
+                    {
+                        Config.SetSetting("Maximized", "false");
+                    }
+                };
         }
 
         private void SetEditorToolStripItemsVisibility(bool visibility)

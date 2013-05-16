@@ -16,7 +16,6 @@ namespace DownMarker.WinForms
       private void InitializeComponent()
       {
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.markdownEditorTextBox = new DownMarker.WinForms.RichTextBoxEx();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +64,7 @@ namespace DownMarker.WinForms
             this.quoteButton = new System.Windows.Forms.ToolStripButton();
             this.codeBlockButton = new System.Windows.Forms.ToolStripButton();
             this.codeSpanButton = new System.Windows.Forms.ToolStripButton();
+            this.markdownEditorTextBox = new DownMarker.WinForms.RichTextBoxEx();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -86,24 +86,10 @@ namespace DownMarker.WinForms
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.webBrowser);
-            this.splitContainer.Size = new System.Drawing.Size(873, 622);
-            this.splitContainer.SplitterDistance = 256;
+            this.splitContainer.Size = new System.Drawing.Size(917, 568);
+            this.splitContainer.SplitterDistance = 234;
             this.splitContainer.TabIndex = 0;
             this.splitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.HandleSplitterMoved);
-            // 
-            // markdownEditorTextBox
-            // 
-            this.markdownEditorTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.markdownEditorTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.markdownEditorTextBox.Location = new System.Drawing.Point(0, 0);
-            this.markdownEditorTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.markdownEditorTextBox.Name = "markdownEditorTextBox";
-            this.markdownEditorTextBox.Size = new System.Drawing.Size(873, 256);
-            this.markdownEditorTextBox.TabIndex = 0;
-            this.markdownEditorTextBox.Text = "";
-            this.markdownEditorTextBox.VerticalScrollPosition = 0;
-            this.markdownEditorTextBox.SelectionChanged += new System.EventHandler(this.HandleMarkdownEditorTextBoxSelectionChanged);
-            this.markdownEditorTextBox.TextChanged += new System.EventHandler(this.HandleTextBoxTextChanged);
             // 
             // webBrowser
             // 
@@ -112,7 +98,7 @@ namespace DownMarker.WinForms
             this.webBrowser.Location = new System.Drawing.Point(0, 0);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(873, 362);
+            this.webBrowser.Size = new System.Drawing.Size(917, 330);
             this.webBrowser.TabIndex = 0;
             this.webBrowser.WebBrowserShortcutsEnabled = false;
             this.webBrowser.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.HandleWebBrowserNavigated);
@@ -126,7 +112,7 @@ namespace DownMarker.WinForms
             this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(873, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(917, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -401,7 +387,7 @@ namespace DownMarker.WinForms
             this.codeSpanButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(873, 39);
+            this.toolStrip1.Size = new System.Drawing.Size(917, 39);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -556,11 +542,25 @@ namespace DownMarker.WinForms
             this.codeSpanButton.ToolTipText = "Code Span (Ctrl+T)";
             this.codeSpanButton.Click += new System.EventHandler(this.HandleCodeSpanClick);
             // 
+            // markdownEditorTextBox
+            // 
+            this.markdownEditorTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.markdownEditorTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.markdownEditorTextBox.Location = new System.Drawing.Point(0, 0);
+            this.markdownEditorTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.markdownEditorTextBox.Name = "markdownEditorTextBox";
+            this.markdownEditorTextBox.Size = new System.Drawing.Size(917, 234);
+            this.markdownEditorTextBox.TabIndex = 0;
+            this.markdownEditorTextBox.Text = "";
+            this.markdownEditorTextBox.VerticalScrollPosition = 0;
+            this.markdownEditorTextBox.SelectionChanged += new System.EventHandler(this.HandleMarkdownEditorTextBoxSelectionChanged);
+            this.markdownEditorTextBox.TextChanged += new System.EventHandler(this.HandleTextBoxTextChanged);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(873, 685);
+            this.ClientSize = new System.Drawing.Size(917, 631);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
