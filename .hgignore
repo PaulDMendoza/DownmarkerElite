@@ -1,0 +1,16 @@
+syntax: glob
+
+bin
+obj
+*.suo
+*.user
+*.userprefs
+*.resources
+*.pidb
+*.orig
+*.cache
+*.swp
+TestResult.xml
+test-results
+VersionInfo.generated.cs
+kevinburke-markdown.css

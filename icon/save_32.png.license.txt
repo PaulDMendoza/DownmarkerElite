@@ -1,0 +1,5 @@
+save_32.png is downloaded from http://www.woothemes.com/2009/09/woofunction/
+
+The downloaded zip file did not contain a copyright notice or license
+information but the webpage at the above URL does state that the icon set is
+released under the GNU General Public License.

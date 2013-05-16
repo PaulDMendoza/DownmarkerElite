@@ -1,0 +1,16 @@
+The first revision of external_link.svg was downloaded from
+http://commons.wikimedia.org/wiki/File:Icon_External_Link.svg
+
+The image had the upload timestamp 2009-02-14 12:11 (UTC) and had the following
+notice:
+
+> I, the copyright holder of this work, hereby publish it under the following
+> license:
+>
+> This work is free software; you can redistribute it and/or modify it under
+> the terms of the GNU General Public License as published by the Free Software
+> Foundation; either version 2 of the License, or any later version. This work
+> is distributed in the hope that it will be useful, but without any warranty;
+> without even the implied warranty of merchantability or fitness for a
+> particular purpose. See version 2 and version 3 of the GNU General Public
+> License for more details.

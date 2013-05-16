@@ -1,0 +1,152 @@
+<?xml version='1.0'?>
+
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+
+    <Product Name='DownMarker'
+        Id='*'
+        Language='1033' 
+        Version='$(env.downmarkerversion)'
+        Manufacturer='wcoenen@gmail.com'
+        UpgradeCode='521d5074-ba29-4c39-956e-f26b34ef8a64'>
+
+        <Package Description='DownMarker installer package'
+            Manufacturer='wcoenen@gmail.com'
+            InstallScope='perUser'
+            InstallerVersion='200'
+            Compressed='yes' />
+
+            <Media Id='1' Cabinet='product.cab' EmbedCab='yes' />
+            <MajorUpgrade
+               DowngradeErrorMessage="Downmarker is already installed with a higher version."
+               AllowSameVersionUpgrades="yes" />
+
+            <PropertyRef Id="NETFRAMEWORK35" />
+            <Condition Message="This application requires .NET Framework 3.5. Please download it from http://bit.ly/i1kc7T and run this installer again.">
+               <![CDATA[Installed OR NETFRAMEWORK35]]>
+            </Condition>
+
+            <!-- folders -->
+
+            <Directory Id='TARGETDIR' Name='SourceDir'>
+                <Directory Id='LocalAppDataFolder' Name='AppData'>
+                     <Directory Id='DownMarkerFolder' Name='DownMarker' >
+                        <Directory Id='DownMarkerStylesFolder' Name='styles' />
+                     </Directory>
+                </Directory>
+                <Directory Id='ProgramMenuFolder' />
+            </Directory>
+
+            <!-- components -->
+
+            <Component Id='component.downmarker.exe' 
+                Guid='180483e2-a089-4205-80c8-ccc0b517d3a7'
+                Directory='DownMarkerFolder'>
+                <File Id='downmarker.exe' Source='..\bin\downmarker.exe' />
+                <RemoveFolder Id="RemoveDownMarkerFolder" On="uninstall" />
+                <!-- registry entry to be used as keypath -->
+                <RegistryValue Root="HKCU"
+                    Key="Software\wcoenen\downmarker"
+                    Name="component.downmarker.exe.installed"
+                    Type="integer"
+                    Value="1"
+                    KeyPath="yes"/>
+                <!-- associate .md file extension with downmarker -->
+                <ProgId Id="DownMarker" Icon="downmarker.exe" 
+                    Description="Markdown Document">
+                    <Extension Id="md" >
+                       <Verb Id="open" Argument="&quot;%1&quot;"
+                          TargetFile="downmarker.exe" />
+                    </Extension>
+                </ProgId>
+               <!-- add "New - Markdown Document" to explorer context menu -->
+                <File Source="setup\sample.md" />
+                <RegistryValue Root="HKCR" Key=".md\ShellNew"
+                    Name="NullFile"
+                    Type="string"
+                    Value=""
+                    Action="write" />
+            </Component>
+
+            <Component Id='component.markdownsharp.dll'
+                Guid='5dcba008-c660-4d6c-be57-4910d15a901c'
+                Directory='DownMarkerFolder'>
+                <File Id='markdownsharp.dll'
+                   Source='..\bin\markdownsharp.dll' />
+                <!-- registry entry to be used as keypath -->
+                <RegistryValue Root="HKCU"
+                    Key="Software\wcoenen\downmarker"
+                    Name="component.markdownsharp.dll.installed"
+                    Type="integer"
+                    Value="1"
+                    KeyPath="yes"/>
+            </Component>
+
+            <Component Id='component.downmarker.core.dll'
+                Guid='62113f4b-faee-4fea-9589-e7a7e1748d18'
+                Directory='DownMarkerFolder'>
+                <File Id='downmarker.core.dll'
+                   Source='..\bin\downmarker.core.dll' />
+                <!-- registry entry to be used as keypath -->
+                <RegistryValue Root="HKCU"
+                    Key="Software\wcoenen\downmarker"
+                    Name="component.downmarker.core.dll.installed"
+                    Type="integer"
+                    Value="1"
+                    KeyPath="yes"/>
+            </Component>
+
+
+            <Component Id="component.downmarker.exe.shortcut"
+                Guid='f0dfa13e-bd4d-4fea-b2ef-bdde6fd98d9d'
+                Directory="ProgramMenuFolder">
+                <Shortcut Id="DownMarkerExeStartMenuShortcut" 
+                    Name="DownMarker"
+                    Description="A markdown editor"
+                    Target="[DownMarkerFolder]downmarker.exe"
+                    WorkingDirectory="DownMarkerFolder"/>
+                <!-- registry entry to be used as keypath -->
+                <RegistryValue Root="HKCU"
+                    Key="Software\wcoenen\downmarker"
+                    Name="component.downmarker.exe.shortcut.installed"
+                    Type="integer"
+                    Value="1"
+                    KeyPath="yes"/>
+            </Component>
+
+            <Component Id="component.styles.kevinburke" 
+                  Directory="DownMarkerStylesFolder"
+                  Guid="5c75875c-7dd2-4313-879a-5725584bf877">
+               <File Source="..\bin\styles\kevinburke-markdown.css" />
+               <RemoveFolder Id="DownMarkerStylesFolder" On="uninstall" />
+                <!-- registry entry to be used as keypath -->
+                <RegistryValue Root="HKCU"
+                    Key="Software\wcoenen\downmarker"
+                    Name="component.styles.kevinburke.installed"
+                    Type="integer"
+                    Value="1"
+                    KeyPath="yes"/>
+            </Component>
+
+            <!-- features -->
+
+            <Feature Id='mainFeature' Title='DownMarker' Level='1'>
+                <ComponentRef Id='component.downmarker.exe' />
+                <ComponentRef Id='component.downmarker.exe.shortcut' />
+                <ComponentRef Id='component.downmarker.core.dll' />
+                <ComponentRef Id='component.markdownsharp.dll' />
+                <ComponentRef Id='component.styles.kevinburke' />
+            </Feature>
+
+
+            <!-- launch application after installation -->
+            <CustomAction Id="LaunchApplication"
+               Return="asyncNoWait"
+               Execute="commit"
+               FileKey="downmarker.exe"
+               ExeCommand=''/>
+            <InstallExecuteSequence>
+                <Custom Action="LaunchApplication" Before="InstallFinalize" />
+            </InstallExecuteSequence>
+
+    </Product>
+</Wix>
