@@ -555,7 +555,7 @@ namespace DownMarker.Core
                     "\n",
                     this.persistentState
                         .RecentlyUsedDocuments
-                        .Select(file => "[" + file + "](" + (new Uri(file)).AbsoluteUri + ")  ")
+                        .Select(file => "[" + Path.GetFileName(file) + "](" + (new Uri(file)).AbsoluteUri + ")  ")
                         .ToArray());
             }
             else

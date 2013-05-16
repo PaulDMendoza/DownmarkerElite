@@ -12,7 +12,7 @@ namespace DownMarker.Core
       private readonly IRegistry registry;
       private const string REGKEY = @"software\downmarker";
       private const string REGKEY_RECENTLY_USED = REGKEY + @"\recentlyused";
-      private const int MAX = 10;
+      private const int MAX = 30;
 
       public PersistentState(IRegistry registry)
       {
@@ -66,7 +66,7 @@ namespace DownMarker.Core
       {
          get
          {
-            return registry.GetValue<string>(REGKEY, "Style") == "plain";
+             return registry.GetValue<string>(REGKEY, "Style") != "kburke";
          }
          set
          {
