@@ -8,8 +8,7 @@ Get Started
 Tips
 ----
 - The default style is ugly. Switch over to the GitHub style by unchecking **View -> Plain Style**
-- Use the "Open Directory" to go back and forth between files in alphabetical order
-
+- Once a file is open you can navigate through all the other Markdown (*.md) files in the directory with the round orange Prev and Next buttons.
 
 Recently Opened Files
 ---------------------

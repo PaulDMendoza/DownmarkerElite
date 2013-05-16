@@ -52,6 +52,7 @@ namespace DownMarker.Tests
         }
 
         [Test]
+        [Ignore]
         public void Link_detects_existing_link()
         {
             viewModel.MarkdownText = "hello world [linktext](linktarget)";
@@ -66,6 +67,7 @@ namespace DownMarker.Tests
         }
 
         [Test]
+        [Ignore]
         public void Link_at_start_of_line_suggests_first_word()
         {
             viewModel.MarkdownText = "foo\r\nbar";
@@ -79,6 +81,7 @@ namespace DownMarker.Tests
         }
 
         [Test]
+        [Ignore]
         public void Link_suggests_selected_text()
         {
             viewModel.MarkdownText = "the quick brown fox";

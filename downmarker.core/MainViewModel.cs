@@ -397,6 +397,58 @@ namespace DownMarker.Core
                 this.navigationHistory.Back(); //restore nav pointer
         }
 
+
+        public void GoToNextFileInDirectory()
+        {
+            var directory = new DirectoryInfo(Path.GetDirectoryName(this.currentFullPath));
+            var orderedFiles = directory.GetFiles("*.md");
+            string fileName = this.currentFullPath;
+            var orderByDescending = orderedFiles.OrderByDescending(f => f.FullName);
+            var takeWhile = orderByDescending.TakeWhile(f => f.FullName != this.currentFullPath);
+            var nextFile = takeWhile.LastOrDefault();
+
+            if (nextFile != null)
+            {
+                fileName = nextFile.FullName;
+            }
+            else
+            {
+                fileName = orderByDescending.Last().FullName;
+            }
+
+            bool success = OpenInternal(fileName);
+            if (success)
+                UpdateNavigationCommands();
+            else
+                this.navigationHistory.Back(); //restore nav pointer
+        }
+
+        public void GoToPrevFileInDirectory()
+        {
+            var directory = new DirectoryInfo(Path.GetDirectoryName(this.currentFullPath));
+            var orderedFiles = directory.GetFiles("*.md");
+            string fileName = this.currentFullPath;
+            var orderByDescending = orderedFiles.OrderBy(f => f.FullName);
+            var takeWhile = orderByDescending.TakeWhile(f => f.FullName != this.currentFullPath);
+            var nextFile = takeWhile.LastOrDefault();
+
+            if (nextFile != null)
+            {
+                fileName = nextFile.FullName;
+            }
+            else
+            {
+                fileName = orderByDescending.Last().FullName;
+            }
+
+            bool success = OpenInternal(fileName);
+            if (success)
+                UpdateNavigationCommands();
+            else
+                this.navigationHistory.Back(); //restore nav pointer
+        }
+
+
         private Substring GetSelectionOrWordAtCursor()
         {
             return GetSelection(x => !char.IsLetterOrDigit(this.MarkdownText[x]));
@@ -1135,5 +1187,7 @@ namespace DownMarker.Core
         public event EventHandler RequestClose;
 
         public event EventHandler TemporaryHtmlFileContentChanged;
+
+        
     }
 }

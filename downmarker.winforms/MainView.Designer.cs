@@ -15,12 +15,15 @@ namespace DownMarker.WinForms
       /// </summary>
       private void InitializeComponent()
       {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.markdownEditorTextBox = new DownMarker.WinForms.RichTextBoxEx();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.backMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,7 +67,9 @@ namespace DownMarker.WinForms
             this.quoteButton = new System.Windows.Forms.ToolStripButton();
             this.codeBlockButton = new System.Windows.Forms.ToolStripButton();
             this.codeSpanButton = new System.Windows.Forms.ToolStripButton();
-            this.markdownEditorTextBox = new DownMarker.WinForms.RichTextBoxEx();
+            this.prevFileButton = new System.Windows.Forms.ToolStripButton();
+            this.nextFileButton = new System.Windows.Forms.ToolStripButton();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -87,9 +92,23 @@ namespace DownMarker.WinForms
             // 
             this.splitContainer.Panel2.Controls.Add(this.webBrowser);
             this.splitContainer.Size = new System.Drawing.Size(917, 568);
-            this.splitContainer.SplitterDistance = 234;
+            this.splitContainer.SplitterDistance = 223;
             this.splitContainer.TabIndex = 0;
             this.splitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.HandleSplitterMoved);
+            // 
+            // markdownEditorTextBox
+            // 
+            this.markdownEditorTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.markdownEditorTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.markdownEditorTextBox.Location = new System.Drawing.Point(0, 0);
+            this.markdownEditorTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.markdownEditorTextBox.Name = "markdownEditorTextBox";
+            this.markdownEditorTextBox.Size = new System.Drawing.Size(917, 223);
+            this.markdownEditorTextBox.TabIndex = 0;
+            this.markdownEditorTextBox.Text = "";
+            this.markdownEditorTextBox.VerticalScrollPosition = 0;
+            this.markdownEditorTextBox.SelectionChanged += new System.EventHandler(this.HandleMarkdownEditorTextBoxSelectionChanged);
+            this.markdownEditorTextBox.TextChanged += new System.EventHandler(this.HandleTextBoxTextChanged);
             // 
             // webBrowser
             // 
@@ -98,7 +117,7 @@ namespace DownMarker.WinForms
             this.webBrowser.Location = new System.Drawing.Point(0, 0);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(917, 330);
+            this.webBrowser.Size = new System.Drawing.Size(917, 341);
             this.webBrowser.TabIndex = 0;
             this.webBrowser.WebBrowserShortcutsEnabled = false;
             this.webBrowser.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.HandleWebBrowserNavigated);
@@ -121,6 +140,7 @@ namespace DownMarker.WinForms
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
+            this.openDirectoryToolStripMenuItem,
             this.reloadToolStripMenuItem,
             this.toolStripSeparator5,
             this.backMenuItem,
@@ -151,6 +171,13 @@ namespace DownMarker.WinForms
             this.openToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.openToolStripMenuItem.Text = "&Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.HandleOpenClick);
+            // 
+            // openDirectoryToolStripMenuItem
+            // 
+            this.openDirectoryToolStripMenuItem.Name = "openDirectoryToolStripMenuItem";
+            this.openDirectoryToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.openDirectoryToolStripMenuItem.Text = "Open Directory";
+            this.openDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openDirectoryToolStripMenuItem_Click);
             // 
             // reloadToolStripMenuItem
             // 
@@ -384,7 +411,9 @@ namespace DownMarker.WinForms
             this.italicButton,
             this.quoteButton,
             this.codeBlockButton,
-            this.codeSpanButton});
+            this.codeSpanButton,
+            this.prevFileButton,
+            this.nextFileButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(917, 39);
@@ -542,19 +571,27 @@ namespace DownMarker.WinForms
             this.codeSpanButton.ToolTipText = "Code Span (Ctrl+T)";
             this.codeSpanButton.Click += new System.EventHandler(this.HandleCodeSpanClick);
             // 
-            // markdownEditorTextBox
+            // prevFileButton
             // 
-            this.markdownEditorTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.markdownEditorTextBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.markdownEditorTextBox.Location = new System.Drawing.Point(0, 0);
-            this.markdownEditorTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.markdownEditorTextBox.Name = "markdownEditorTextBox";
-            this.markdownEditorTextBox.Size = new System.Drawing.Size(917, 234);
-            this.markdownEditorTextBox.TabIndex = 0;
-            this.markdownEditorTextBox.Text = "";
-            this.markdownEditorTextBox.VerticalScrollPosition = 0;
-            this.markdownEditorTextBox.SelectionChanged += new System.EventHandler(this.HandleMarkdownEditorTextBoxSelectionChanged);
-            this.markdownEditorTextBox.TextChanged += new System.EventHandler(this.HandleTextBoxTextChanged);
+            this.prevFileButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.prevFileButton.Image = ((System.Drawing.Image)(resources.GetObject("prevFileButton.Image")));
+            this.prevFileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.prevFileButton.Name = "prevFileButton";
+            this.prevFileButton.Size = new System.Drawing.Size(23, 36);
+            this.prevFileButton.Text = "prevFileButton";
+            this.prevFileButton.ToolTipText = "Goes to the previous alphabetical file in the directory.";
+            this.prevFileButton.Click += new System.EventHandler(this.HandlePrevFileInDirectoryClick);
+            // 
+            // nextFileButton
+            // 
+            this.nextFileButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.nextFileButton.Image = ((System.Drawing.Image)(resources.GetObject("nextFileButton.Image")));
+            this.nextFileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.nextFileButton.Name = "nextFileButton";
+            this.nextFileButton.Size = new System.Drawing.Size(23, 36);
+            this.nextFileButton.Text = "toolStripButton1";
+            this.nextFileButton.ToolTipText = "Goes to the next alphabetical file in the same directory.";
+            this.nextFileButton.Click += new System.EventHandler(this.HandleNextFileInDirectoryClick);
             // 
             // MainView
             // 
@@ -570,6 +607,7 @@ namespace DownMarker.WinForms
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HandleFormClosing);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -632,6 +670,9 @@ namespace DownMarker.WinForms
       private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
       private System.Windows.Forms.ToolStripMenuItem plainStyleToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem reloadToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem openDirectoryToolStripMenuItem;
+      private System.Windows.Forms.ToolStripButton nextFileButton;
+      private System.Windows.Forms.ToolStripButton prevFileButton;
    }
 }
 

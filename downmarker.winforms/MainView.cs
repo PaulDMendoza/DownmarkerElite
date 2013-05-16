@@ -316,6 +316,16 @@ namespace DownMarker.WinForms
             this.viewModel.GoBack();     
         }
 
+        private void HandleNextFileInDirectoryClick(object sender, System.EventArgs e)
+        {
+            this.viewModel.GoToNextFileInDirectory();
+        }
+
+        private void HandlePrevFileInDirectoryClick(object sender, System.EventArgs e)
+        {
+            this.viewModel.GoToPrevFileInDirectory();
+        }
+
         private void HandleBoldClick(object sender, EventArgs e)
         {
             this.viewModel.Bold();
@@ -409,6 +419,13 @@ namespace DownMarker.WinForms
         {
            this.viewModel.Reload();
         }
+
+        private void openDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        
         
     }
 }

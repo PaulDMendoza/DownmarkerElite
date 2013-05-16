@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DownMarker.Tests</RootNamespace>
     <AssemblyName>DownMarker.Tests</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -79,7 +79,6 @@
     <Compile Include="NotifyPropertyChangedExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PersistentStateTests.cs" />
-    <Compile Include="RichTextBoxExTests.cs" />
     <Compile Include="StringChangeTests.cs" />
     <Compile Include="ViewModelTestsBase.cs" />
   </ItemGroup>
