@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual C# Express 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "downmarker.winforms", "downmarker.winforms\downmarker.winforms.csproj", "{8B452FD9-CC33-47AF-B320-062F91AC1CCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkdownSharp", "external\MarkdownSharp\MarkdownSharp\MarkdownSharp.csproj", "{37619116-CCE8-465A-8B1F-081CA53364BB}"
